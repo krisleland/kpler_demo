@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kpler_map_demo/widgets/country_card.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
@@ -19,19 +20,26 @@ class WorldMap extends StatefulWidget {
 
 class WorldMapState extends State<WorldMap> {
   MapboxMapController? mapController;
+  late ScrollController scrollController;
   LocationData? locationData;
   var isLight = true;
+
+  @override
+  initState() {
+    super.initState();
+    scrollController = ScrollController();
+  }
 
   _onMapCreated(MapboxMapController controller) {
     mapController = controller;
   }
 
   _onStyleLoadedCallback() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: const Text("Style loaded :)"),
-      backgroundColor: Theme.of(context).primaryColor,
-      duration: const Duration(seconds: 1),
-    ));
+    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //   content: const Text("Style loaded :)"),
+    //   backgroundColor: Theme.of(context).primaryColor,
+    //   duration: const Duration(seconds: 1),
+    // ));
   }
 
   @override
@@ -53,42 +61,46 @@ class WorldMapState extends State<WorldMap> {
           });
         },
         child: Scaffold(
-            floatingActionButton: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: FloatingActionButton(
-                child: const Icon(Icons.swap_horiz),
-                onPressed: () => setState(
-                  () => isLight = !isLight,
-                ),
-              ),
-            ),
-            body: Column(children: [
-              Expanded(
-                child: MapboxMap(
-                  styleString: isLight ? MapboxStyles.LIGHT : MapboxStyles.DARK,
-                  accessToken: accessToken,
-                  onMapCreated: _onMapCreated,
-                  initialCameraPosition: CameraPosition(
-                      zoom: locationData != null ? 6.0 : 0.0,
-                      target: LatLng(
-                        locationData?.latitude ?? 0,
-                        locationData?.longitude ?? 0,
-                      )),
-                  onStyleLoadedCallback: _onStyleLoadedCallback,
-                ),
-              ),
-              SizedBox(
-                  height: 300,
+            body: Stack(children: [
+          MapboxMap(
+            styleString: isLight ? MapboxStyles.LIGHT : MapboxStyles.DARK,
+            accessToken: accessToken,
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: CameraPosition(
+                zoom: locationData != null ? 6.0 : 0.0,
+                target: LatLng(
+                  locationData?.latitude ?? 0,
+                  locationData?.longitude ?? 0,
+                )),
+            onStyleLoadedCallback: _onStyleLoadedCallback,
+          ),
+          DraggableScrollableSheet(
+              expand: true,
+              snap: true,
+              initialChildSize: 0.3,
+              minChildSize: 0.15,
+              maxChildSize: 0.5,
+              builder: (scrollContext, scrollController) {
+                return Card(
+                  elevation: 8,
+                  color: Colors.grey,
                   child: BlocBuilder<MapCubit, MapState>(
                       builder: (context, state) {
                     return state.countries.isEmpty
-                        ? const CircularProgressIndicator()
+                        ? const SizedBox(
+                            height: 50, child: CircularProgressIndicator())
                         : ListView.builder(
+                            controller: scrollController,
                             itemCount: state.countries.length,
                             itemBuilder: (context, index) {
-                              return Card(child: Text(state.countries[index].name!.common!),);
+                              return CountryCard(
+                                country: state.countries[index],
+                                scrollController: scrollController,
+                              );
                             });
-                  })),
-            ])));
+                  }),
+                );
+              }),
+        ])));
   }
 }

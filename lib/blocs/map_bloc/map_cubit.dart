@@ -52,4 +52,8 @@ class MapCubit extends Cubit<MapState> {
   void updateLocationData(LocationData locationData) {
     emit(state.copyWith(latLng: LatLng(locationData.latitude ?? state.latLng.latitude, locationData.longitude ?? state.latLng.longitude)));
   }
+
+  void selectCountry(Country country) {
+    emit(state.copyWith(latLng: LatLng(country.latlng![0], country.latlng![1]), zoom: 4));
+  }
 }
