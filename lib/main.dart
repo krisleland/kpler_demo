@@ -79,9 +79,9 @@ class WorldMapState extends State<WorldMap> {
           DraggableScrollableSheet(
               expand: true,
               snap: true,
-              initialChildSize: 0.3,
-              minChildSize: 0.15,
-              maxChildSize: 0.5,
+              initialChildSize: 0.15,
+              minChildSize: 0.10,
+              maxChildSize: 0.3,
               builder: (scrollContext, scrollController) {
                 return Card(
                   elevation: 8,
@@ -89,8 +89,10 @@ class WorldMapState extends State<WorldMap> {
                   child: BlocBuilder<MapCubit, MapState>(
                       builder: (context, state) {
                     return state.countries.isEmpty
-                        ? const SizedBox(
-                            height: 50, child: CircularProgressIndicator())
+                        ? const Expanded(
+                          child: SizedBox(
+                              height: 50, child: CircularProgressIndicator()),
+                        )
                         : ListView.builder(
                             controller: scrollController,
                             itemCount: state.countries.length,
