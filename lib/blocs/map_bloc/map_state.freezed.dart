@@ -18,10 +18,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$MapStateTearOff {
   const _$MapStateTearOff();
 
-  _MapState call({LatLng latLng = const LatLng(0, 0), double zoom = 0.0}) {
+  _MapState call(
+      {LatLng latLng = const LatLng(0, 0),
+      double zoom = 0.0,
+      List<Country> countries = const []}) {
     return _MapState(
       latLng: latLng,
       zoom: zoom,
+      countries: countries,
     );
   }
 }
@@ -33,6 +37,7 @@ const $MapState = _$MapStateTearOff();
 mixin _$MapState {
   LatLng get latLng => throw _privateConstructorUsedError;
   double get zoom => throw _privateConstructorUsedError;
+  List<Country> get countries => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStateCopyWith<MapState> get copyWith =>
@@ -43,7 +48,7 @@ mixin _$MapState {
 abstract class $MapStateCopyWith<$Res> {
   factory $MapStateCopyWith(MapState value, $Res Function(MapState) then) =
       _$MapStateCopyWithImpl<$Res>;
-  $Res call({LatLng latLng, double zoom});
+  $Res call({LatLng latLng, double zoom, List<Country> countries});
 }
 
 /// @nodoc
@@ -58,6 +63,7 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
   $Res call({
     Object? latLng = freezed,
     Object? zoom = freezed,
+    Object? countries = freezed,
   }) {
     return _then(_value.copyWith(
       latLng: latLng == freezed
@@ -68,6 +74,10 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
           ? _value.zoom
           : zoom // ignore: cast_nullable_to_non_nullable
               as double,
+      countries: countries == freezed
+          ? _value.countries
+          : countries // ignore: cast_nullable_to_non_nullable
+              as List<Country>,
     ));
   }
 }
@@ -77,7 +87,7 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
   factory _$MapStateCopyWith(_MapState value, $Res Function(_MapState) then) =
       __$MapStateCopyWithImpl<$Res>;
   @override
-  $Res call({LatLng latLng, double zoom});
+  $Res call({LatLng latLng, double zoom, List<Country> countries});
 }
 
 /// @nodoc
@@ -93,6 +103,7 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
   $Res call({
     Object? latLng = freezed,
     Object? zoom = freezed,
+    Object? countries = freezed,
   }) {
     return _then(_MapState(
       latLng: latLng == freezed
@@ -103,6 +114,10 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
           ? _value.zoom
           : zoom // ignore: cast_nullable_to_non_nullable
               as double,
+      countries: countries == freezed
+          ? _value.countries
+          : countries // ignore: cast_nullable_to_non_nullable
+              as List<Country>,
     ));
   }
 }
@@ -110,7 +125,10 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MapState implements _MapState {
-  _$_MapState({this.latLng = const LatLng(0, 0), this.zoom = 0.0});
+  _$_MapState(
+      {this.latLng = const LatLng(0, 0),
+      this.zoom = 0.0,
+      this.countries = const []});
 
   @JsonKey()
   @override
@@ -118,10 +136,13 @@ class _$_MapState implements _MapState {
   @JsonKey()
   @override
   final double zoom;
+  @JsonKey()
+  @override
+  final List<Country> countries;
 
   @override
   String toString() {
-    return 'MapState(latLng: $latLng, zoom: $zoom)';
+    return 'MapState(latLng: $latLng, zoom: $zoom, countries: $countries)';
   }
 
   @override
@@ -130,14 +151,16 @@ class _$_MapState implements _MapState {
         (other.runtimeType == runtimeType &&
             other is _MapState &&
             const DeepCollectionEquality().equals(other.latLng, latLng) &&
-            const DeepCollectionEquality().equals(other.zoom, zoom));
+            const DeepCollectionEquality().equals(other.zoom, zoom) &&
+            const DeepCollectionEquality().equals(other.countries, countries));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(latLng),
-      const DeepCollectionEquality().hash(zoom));
+      const DeepCollectionEquality().hash(zoom),
+      const DeepCollectionEquality().hash(countries));
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +169,15 @@ class _$_MapState implements _MapState {
 }
 
 abstract class _MapState implements MapState {
-  factory _MapState({LatLng latLng, double zoom}) = _$_MapState;
+  factory _MapState({LatLng latLng, double zoom, List<Country> countries}) =
+      _$_MapState;
 
   @override
   LatLng get latLng;
   @override
   double get zoom;
+  @override
+  List<Country> get countries;
   @override
   @JsonKey(ignore: true)
   _$MapStateCopyWith<_MapState> get copyWith =>

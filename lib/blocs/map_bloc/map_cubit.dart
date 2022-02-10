@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kpler_map_demo/country_api/country_api_handler.dart';
+import 'package:kpler_map_demo/models/countries_api.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
@@ -7,7 +9,10 @@ import 'map_bloc.dart';
 class MapCubit extends Cubit<MapState> {
   MapCubit() : super(MapState(latLng: const LatLng(0, 0), zoom: 0)) {
     _getInitialLocation();
+    _getCountryList();
   }
+
+  final countryHandler = CountryAPIHandler();
 
   //called once in the cubit constructor to get user location to zoom the map
   void _getInitialLocation() async {
@@ -35,6 +40,13 @@ class MapCubit extends Cubit<MapState> {
 
     _locationData = await location.getLocation();
     emit(MapState(latLng: LatLng(_locationData.latitude ?? 0, _locationData.longitude ?? 0), zoom: 6));
+  }
+
+  void _getCountryList() async {
+    List<Country> countries = await countryHandler.getAll();
+    if (countries.isNotEmpty) {
+      emit(state.copyWith(countries: countries));
+    }
   }
 
   void updateLocationData(LocationData locationData) {
