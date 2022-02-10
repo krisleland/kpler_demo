@@ -39,7 +39,7 @@ class MapCubit extends Cubit<MapState> {
     }
 
     _locationData = await location.getLocation();
-    emit(MapState(latLng: LatLng(_locationData.latitude ?? 0, _locationData.longitude ?? 0), zoom: 6));
+    emit(state.copyWith(latLng: LatLng(_locationData.latitude ?? 0, _locationData.longitude ?? 0), zoom: 6));
   }
 
   void _getCountryList() async {

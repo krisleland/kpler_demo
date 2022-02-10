@@ -28,6 +28,6 @@ class CountryAPIHandler {
         countries.add(Country.fromJson(data[i]));
       }
     }
-    return countries;
+    return countries..sort((a,b) => a.name!.common!.compareTo(b.name!.common!));
   }
 }
