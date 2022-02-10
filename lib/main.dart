@@ -75,30 +75,31 @@ class WorldMapState extends State<WorldMap> {
                 )),
             onStyleLoadedCallback: _onStyleLoadedCallback,
           ),
-          const Search(),
+          const Padding(
+            padding: EdgeInsets.only(top: 60),
+            child: Search(),
+          ),
           DraggableScrollableSheet(
               expand: true,
               snap: true,
-              initialChildSize: 0.15,
+              initialChildSize: 0.10,
               minChildSize: 0.10,
               maxChildSize: 0.3,
               builder: (scrollContext, scrollController) {
-                return Card(
-                  elevation: 8,
+                return Container(
                   color: Colors.grey,
                   child: BlocBuilder<MapCubit, MapState>(
                       builder: (context, state) {
                     return state.countries.isEmpty
-                        ? const Expanded(
-                          child: SizedBox(
-                              height: 50, child: CircularProgressIndicator()),
-                        )
+                        ? const SizedBox(
+                            height: 50, child: CircularProgressIndicator())
                         : ListView.builder(
                             controller: scrollController,
                             itemCount: state.countries.length,
                             itemBuilder: (context, index) {
                               return CountryCard(
-                                country: state.countries.values.elementAt(index),
+                                country:
+                                    state.countries.values.elementAt(index),
                                 scrollController: scrollController,
                               );
                             });
