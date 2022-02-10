@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'swe.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Swe {
   String? official;
   String? common;

@@ -4,7 +4,7 @@ import 'country_models.dart';
 
 part 'name.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Name {
   String? common;
   String? official;

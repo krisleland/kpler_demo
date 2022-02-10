@@ -37,11 +37,13 @@ Country _$CountryFromJson(Map<String, dynamic> json) => Country(
       translations: json['translations'] == null
           ? null
           : Translations.fromJson(json['translations'] as Map<String, dynamic>),
-      latlng: (json['latlng'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      latlng: (json['latlng'] as List<dynamic>?)
+          ?.map((e) => (e as num).toDouble())
+          .toList(),
       landlocked: json['landlocked'] as bool?,
       borders:
           (json['borders'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      area: json['area'] as int?,
+      area: (json['area'] as num?)?.toDouble(),
       demonyms: json['demonyms'] == null
           ? null
           : Demonyms.fromJson(json['demonyms'] as Map<String, dynamic>),
@@ -49,7 +51,7 @@ Country _$CountryFromJson(Map<String, dynamic> json) => Country(
       maps: json['maps'] == null
           ? null
           : Maps.fromJson(json['maps'] as Map<String, dynamic>),
-      population: json['population'] as int?,
+      population: (json['population'] as num?)?.toDouble(),
       gini: json['gini'] == null
           ? null
           : Gini.fromJson(json['gini'] as Map<String, dynamic>),
@@ -79,7 +81,7 @@ Country _$CountryFromJson(Map<String, dynamic> json) => Country(
     );
 
 Map<String, dynamic> _$CountryToJson(Country instance) => <String, dynamic>{
-      'name': instance.name,
+      'name': instance.name?.toJson(),
       'tld': instance.tld,
       'cca2': instance.cca2,
       'ccn3': instance.ccn3,
@@ -88,30 +90,30 @@ Map<String, dynamic> _$CountryToJson(Country instance) => <String, dynamic>{
       'independent': instance.independent,
       'status': instance.status,
       'unMember': instance.unMember,
-      'currencies': instance.currencies,
-      'idd': instance.idd,
+      'currencies': instance.currencies?.toJson(),
+      'idd': instance.idd?.toJson(),
       'capital': instance.capital,
       'altSpellings': instance.altSpellings,
       'region': instance.region,
       'subregion': instance.subregion,
-      'languages': instance.languages,
-      'translations': instance.translations,
+      'languages': instance.languages?.toJson(),
+      'translations': instance.translations?.toJson(),
       'latlng': instance.latlng,
       'landlocked': instance.landlocked,
       'borders': instance.borders,
       'area': instance.area,
-      'demonyms': instance.demonyms,
+      'demonyms': instance.demonyms?.toJson(),
       'flag': instance.flag,
-      'maps': instance.maps,
+      'maps': instance.maps?.toJson(),
       'population': instance.population,
-      'gini': instance.gini,
+      'gini': instance.gini?.toJson(),
       'fifa': instance.fifa,
-      'car': instance.car,
+      'car': instance.car?.toJson(),
       'timezones': instance.timezones,
       'continents': instance.continents,
-      'flags': instance.flags,
-      'coatOfArms': instance.coatOfArms,
+      'flags': instance.flags?.toJson(),
+      'coatOfArms': instance.coatOfArms?.toJson(),
       'startOfWeek': instance.startOfWeek,
-      'capitalInfo': instance.capitalInfo,
-      'postalCode': instance.postalCode,
+      'capitalInfo': instance.capitalInfo?.toJson(),
+      'postalCode': instance.postalCode?.toJson(),
     };

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kpler_map_demo/country_api/country_api_handler.dart';
-import 'package:kpler_map_demo/models/country_models.dart';
+import 'package:kpler_map_demo/country_api/models/country_models.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 

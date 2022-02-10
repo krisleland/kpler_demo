@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'maps.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Maps {
   String? googleMaps;
   String? openStreetMaps;

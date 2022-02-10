@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'languages.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Languages {
   String? swe;
 

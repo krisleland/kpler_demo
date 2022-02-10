@@ -1,9 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kpler_map_demo/models/country_models.dart';
+
+import 'country_models.dart';
 
 part 'currencies.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Currencies {
   SEK? sEK;
 

@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'car.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Car {
   List<String>? signs;
   String? side;

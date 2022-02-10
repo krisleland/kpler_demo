@@ -4,7 +4,7 @@ import 'country_models.dart';
 
 part 'native_name.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class NativeName {
   Swe? swe;
 

@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'flags.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Flags {
   String? png;
   String? svg;

@@ -4,7 +4,7 @@ import 'country_models.dart';
 
 part 'country.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Country {
   Name? name;
   List<String>? tld;
@@ -23,14 +23,14 @@ class Country {
   String? subregion;
   Languages? languages;
   Translations? translations;
-  List<int>? latlng;
+  List<double>? latlng;
   bool? landlocked;
   List<String>? borders;
-  int? area;
+  double? area;
   Demonyms? demonyms;
   String? flag;
   Maps? maps;
-  int? population;
+  double? population;
   Gini? gini;
   String? fifa;
   Car? car;

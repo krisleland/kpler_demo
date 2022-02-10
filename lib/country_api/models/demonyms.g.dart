@@ -16,6 +16,6 @@ Demonyms _$DemonymsFromJson(Map<String, dynamic> json) => Demonyms(
     );
 
 Map<String, dynamic> _$DemonymsToJson(Demonyms instance) => <String, dynamic>{
-      'eng': instance.eng,
-      'fra': instance.fra,
+      'eng': instance.eng?.toJson(),
+      'fra': instance.fra?.toJson(),
     };

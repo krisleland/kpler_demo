@@ -14,5 +14,5 @@ NativeName _$NativeNameFromJson(Map<String, dynamic> json) => NativeName(
 
 Map<String, dynamic> _$NativeNameToJson(NativeName instance) =>
     <String, dynamic>{
-      'swe': instance.swe,
+      'swe': instance.swe?.toJson(),
     };

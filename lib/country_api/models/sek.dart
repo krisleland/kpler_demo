@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sek.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SEK {
   String? name;
   String? symbol;

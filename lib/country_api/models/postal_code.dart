@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'postal_code.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PostalCode {
   String? format;
   String? regex;

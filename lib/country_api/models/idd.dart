@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'idd.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Idd {
   String? root;
   List<String>? suffixes;

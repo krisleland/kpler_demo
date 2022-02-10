@@ -63,17 +63,19 @@ class WorldMapState extends State<WorldMap> {
               ),
             ),
             body: Column(children: [
-              MapboxMap(
-                styleString: isLight ? MapboxStyles.LIGHT : MapboxStyles.DARK,
-                accessToken: accessToken,
-                onMapCreated: _onMapCreated,
-                initialCameraPosition: CameraPosition(
-                    zoom: locationData != null ? 6.0 : 0.0,
-                    target: LatLng(
-                      locationData?.latitude ?? 0,
-                      locationData?.longitude ?? 0,
-                    )),
-                onStyleLoadedCallback: _onStyleLoadedCallback,
+              Expanded(
+                child: MapboxMap(
+                  styleString: isLight ? MapboxStyles.LIGHT : MapboxStyles.DARK,
+                  accessToken: accessToken,
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition: CameraPosition(
+                      zoom: locationData != null ? 6.0 : 0.0,
+                      target: LatLng(
+                        locationData?.latitude ?? 0,
+                        locationData?.longitude ?? 0,
+                      )),
+                  onStyleLoadedCallback: _onStyleLoadedCallback,
+                ),
               ),
               SizedBox(
                   height: 300,

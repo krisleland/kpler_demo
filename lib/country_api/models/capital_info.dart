@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'capital_info.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class CapitalInfo {
   List<double>? latlng;
 

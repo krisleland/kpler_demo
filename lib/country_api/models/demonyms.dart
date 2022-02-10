@@ -4,7 +4,7 @@ import 'country_models.dart';
 
 part 'demonyms.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Demonyms {
   Eng? eng;
   Eng? fra;

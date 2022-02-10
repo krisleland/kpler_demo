@@ -14,5 +14,5 @@ Currencies _$CurrenciesFromJson(Map<String, dynamic> json) => Currencies(
 
 Map<String, dynamic> _$CurrenciesToJson(Currencies instance) =>
     <String, dynamic>{
-      'sEK': instance.sEK,
+      'sEK': instance.sEK?.toJson(),
     };

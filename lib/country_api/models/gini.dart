@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'gini.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Gini {
   int? i2018;
 

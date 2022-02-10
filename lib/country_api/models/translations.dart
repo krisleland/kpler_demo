@@ -4,7 +4,7 @@ import 'country_models.dart';
 
 part 'translations.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Translations {
   Swe? ara;
   Swe? ces;
