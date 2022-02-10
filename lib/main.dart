@@ -80,8 +80,6 @@ class WorldMapState extends State<WorldMap> {
             child: Search(),
           ),
           DraggableScrollableSheet(
-              expand: true,
-              snap: true,
               initialChildSize: 0.10,
               minChildSize: 0.10,
               maxChildSize: 0.3,
@@ -91,8 +89,7 @@ class WorldMapState extends State<WorldMap> {
                   child: BlocBuilder<MapCubit, MapState>(
                       builder: (context, state) {
                     return state.countries.isEmpty
-                        ? const SizedBox(
-                            height: 50, child: CircularProgressIndicator())
+                        ? const CircularProgressIndicator()
                         : ListView.builder(
                             controller: scrollController,
                             itemCount: state.countries.length,
