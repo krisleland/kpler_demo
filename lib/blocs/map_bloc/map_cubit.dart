@@ -1,0 +1,43 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:location/location.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
+
+import 'map_bloc.dart';
+
+class MapCubit extends Cubit<MapState> {
+  MapCubit() : super(MapState(latLng: const LatLng(0, 0), zoom: 0)) {
+    _getInitialLocation();
+  }
+
+  //called once in the cubit constructor to get user location to zoom the map
+  void _getInitialLocation() async {
+    Location location = Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationData = await location.getLocation();
+    emit(MapState(latLng: LatLng(_locationData.latitude ?? 0, _locationData.longitude ?? 0), zoom: 6));
+  }
+
+  void updateLocationData(LocationData locationData) {
+    emit(state.copyWith(latLng: LatLng(locationData.latitude ?? state.latLng.latitude, locationData.longitude ?? state.latLng.longitude)));
+  }
+}

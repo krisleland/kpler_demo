@@ -1,8 +1,10 @@
-part of './map_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
-class MapState extends Equatable {
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+// part 'map_state.g.dart';
+part 'map_state.freezed.dart';
 
+@freezed
+class MapState with _$MapState {
+  factory MapState({@Default(LatLng(0, 0)) LatLng latLng,@Default(0.0) double zoom}) = _MapState;
 }
