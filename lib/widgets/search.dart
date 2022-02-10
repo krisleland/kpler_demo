@@ -19,48 +19,52 @@ class _SearchState extends State<Search> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
+        height: 50,
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(8))),
         child: BlocBuilder<MapCubit, MapState>(builder: (context, state) {
-          return RawAutocomplete<String>(
-            key: _autocompleteKey,
-            focusNode: _focusNode,
-            textEditingController: _textEditingController,
-            optionsBuilder: (TextEditingValue textEditingValue) {
-              if (textEditingValue.text == '') {
-                return const Iterable<String>.empty();
-              }
-              return state.countries.keys.where((String option) {
-                return option
-                    .toLowerCase()
-                    .contains(textEditingValue.text.toLowerCase());
-              });
-            },
-            onSelected: (String selection) {
-              context
-                  .read<MapCubit>()
-                  .selectCountry(state.countries[selection]!);
-            },
-            fieldViewBuilder: (BuildContext context,
-                TextEditingController textEditingController,
-                FocusNode focusNode,
-                VoidCallback onFieldSubmitted) {
-              return TextFormField(
-                controller: textEditingController,
-                focusNode: focusNode,
-                onFieldSubmitted: (String value) {
-                  onFieldSubmitted();
+          return Stack(
+            children: [
+              RawAutocomplete<String>(
+                key: _autocompleteKey,
+                focusNode: _focusNode,
+                textEditingController: _textEditingController,
+                optionsBuilder: (TextEditingValue textEditingValue) {
+                  if (textEditingValue.text == '') {
+                    return const Iterable<String>.empty();
+                  }
+                  return state.countries.keys.where((String option) {
+                    return option
+                        .toLowerCase()
+                        .contains(textEditingValue.text.toLowerCase());
+                  });
                 },
-              );
-            },
-            optionsViewBuilder: (BuildContext context,
-                AutocompleteOnSelected<String> onSelected,
-                Iterable<String> options) {
-              return Material(
-                child: ListView(
-                  children: options
-                      .map((String option) => GestureDetector(
+                onSelected: (String selection) {
+                  context
+                      .read<MapCubit>()
+                      .selectCountry(state.countries[selection]!);
+                },
+                fieldViewBuilder: (BuildContext context,
+                    TextEditingController textEditingController,
+                    FocusNode focusNode,
+                    VoidCallback onFieldSubmitted) {
+                  return TextFormField(
+                    controller: textEditingController,
+                    focusNode: focusNode,
+                    onFieldSubmitted: (String value) {
+                      onFieldSubmitted();
+                    },
+                  );
+                },
+                optionsViewBuilder: (BuildContext context,
+                    AutocompleteOnSelected<String> onSelected,
+                    Iterable<String> options) {
+                  return Material(
+                    child: ListView(
+                      children: options
+                          .map((String option) =>
+                          GestureDetector(
                             onTap: () {
                               onSelected(option);
                             },
@@ -68,10 +72,22 @@ class _SearchState extends State<Search> {
                               title: Text(option),
                             ),
                           ))
-                      .toList(),
-                ),
-              );
-            },
+                          .toList(),
+                    ),
+                  );
+                },
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                      GestureDetector(onTap: () => _textEditingController.clear() ,child: const Icon(Icons.clear))]
+                  ),
+                ],
+              )
+            ],
           );
         }),
       ),
