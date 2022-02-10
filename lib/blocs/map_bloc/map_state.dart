@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kpler_map_demo/models/countries_api.dart';
+import 'package:kpler_map_demo/models/country_models.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
 // part 'map_state.g.dart';

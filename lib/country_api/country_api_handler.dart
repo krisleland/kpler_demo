@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:kpler_map_demo/country_api/endpoints.dart';
-import 'package:kpler_map_demo/models/countries_api.dart';
+import 'package:kpler_map_demo/models/country_models.dart';
 
 final getIt = GetIt.instance;
 

@@ -47,7 +47,7 @@ class WorldMapState extends State<WorldMap> {
           setState(() {
             mapController?.moveCamera(CameraUpdate.newCameraPosition(
                 CameraPosition(
-                  zoom: state.zoom,
+                    zoom: state.zoom,
                     target: LatLng(
                         state.latLng.latitude, state.latLng.longitude))));
           });
@@ -62,17 +62,31 @@ class WorldMapState extends State<WorldMap> {
                 ),
               ),
             ),
-            body: MapboxMap(
-              styleString: isLight ? MapboxStyles.LIGHT : MapboxStyles.DARK,
-              accessToken: accessToken,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                  zoom: locationData != null ? 6.0 : 0.0,
-                  target: LatLng(
-                    locationData?.latitude ?? 0,
-                    locationData?.longitude ?? 0,
-                  )),
-              onStyleLoadedCallback: _onStyleLoadedCallback,
-            )));
+            body: Column(children: [
+              MapboxMap(
+                styleString: isLight ? MapboxStyles.LIGHT : MapboxStyles.DARK,
+                accessToken: accessToken,
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                    zoom: locationData != null ? 6.0 : 0.0,
+                    target: LatLng(
+                      locationData?.latitude ?? 0,
+                      locationData?.longitude ?? 0,
+                    )),
+                onStyleLoadedCallback: _onStyleLoadedCallback,
+              ),
+              SizedBox(
+                  height: 300,
+                  child: BlocBuilder<MapCubit, MapState>(
+                      builder: (context, state) {
+                    return state.countries.isEmpty
+                        ? const CircularProgressIndicator()
+                        : ListView.builder(
+                            itemCount: state.countries.length,
+                            itemBuilder: (context, index) {
+                              return Card(child: Text(state.countries[index].name!.common!),);
+                            });
+                  })),
+            ])));
   }
 }
