@@ -19,15 +19,16 @@ class CountryAPIHandler {
     return getIt<CountryAPIHandler>();
   }
 
-  Future<List<Country>> getAll() async {
-    List<Country> countries = [];
+  Future<Map<String, Country>> getAll() async {
+    Map<String, Country> countries = {};
     http.Response resp = await http.get(Uri.parse(allCountriesEndpoint));
     if (resp.statusCode == 200) {
       var data = jsonDecode(resp.body);
       for (int i = 0; i < data.length; i++) {
-        countries.add(Country.fromJson(data[i]));
+        var country = Country.fromJson(data[i]);
+        countries[country.name!.common!] = country;
       }
     }
-    return countries..sort((a,b) => a.name!.common!.compareTo(b.name!.common!));
+    return countries; //..sort((a,b) => a.name!.common!.compareTo(b.name!.common!));
   }
 }

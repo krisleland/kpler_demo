@@ -21,7 +21,7 @@ class _$MapStateTearOff {
   _MapState call(
       {LatLng latLng = const LatLng(0, 0),
       double zoom = 0.0,
-      List<Country> countries = const []}) {
+      Map<String, Country> countries = const {}}) {
     return _MapState(
       latLng: latLng,
       zoom: zoom,
@@ -37,7 +37,7 @@ const $MapState = _$MapStateTearOff();
 mixin _$MapState {
   LatLng get latLng => throw _privateConstructorUsedError;
   double get zoom => throw _privateConstructorUsedError;
-  List<Country> get countries => throw _privateConstructorUsedError;
+  Map<String, Country> get countries => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStateCopyWith<MapState> get copyWith =>
@@ -48,7 +48,7 @@ mixin _$MapState {
 abstract class $MapStateCopyWith<$Res> {
   factory $MapStateCopyWith(MapState value, $Res Function(MapState) then) =
       _$MapStateCopyWithImpl<$Res>;
-  $Res call({LatLng latLng, double zoom, List<Country> countries});
+  $Res call({LatLng latLng, double zoom, Map<String, Country> countries});
 }
 
 /// @nodoc
@@ -77,7 +77,7 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
       countries: countries == freezed
           ? _value.countries
           : countries // ignore: cast_nullable_to_non_nullable
-              as List<Country>,
+              as Map<String, Country>,
     ));
   }
 }
@@ -87,7 +87,7 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
   factory _$MapStateCopyWith(_MapState value, $Res Function(_MapState) then) =
       __$MapStateCopyWithImpl<$Res>;
   @override
-  $Res call({LatLng latLng, double zoom, List<Country> countries});
+  $Res call({LatLng latLng, double zoom, Map<String, Country> countries});
 }
 
 /// @nodoc
@@ -117,7 +117,7 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
       countries: countries == freezed
           ? _value.countries
           : countries // ignore: cast_nullable_to_non_nullable
-              as List<Country>,
+              as Map<String, Country>,
     ));
   }
 }
@@ -128,7 +128,7 @@ class _$_MapState implements _MapState {
   _$_MapState(
       {this.latLng = const LatLng(0, 0),
       this.zoom = 0.0,
-      this.countries = const []});
+      this.countries = const {}});
 
   @JsonKey()
   @override
@@ -138,7 +138,7 @@ class _$_MapState implements _MapState {
   final double zoom;
   @JsonKey()
   @override
-  final List<Country> countries;
+  final Map<String, Country> countries;
 
   @override
   String toString() {
@@ -169,15 +169,17 @@ class _$_MapState implements _MapState {
 }
 
 abstract class _MapState implements MapState {
-  factory _MapState({LatLng latLng, double zoom, List<Country> countries}) =
-      _$_MapState;
+  factory _MapState(
+      {LatLng latLng,
+      double zoom,
+      Map<String, Country> countries}) = _$_MapState;
 
   @override
   LatLng get latLng;
   @override
   double get zoom;
   @override
-  List<Country> get countries;
+  Map<String, Country> get countries;
   @override
   @JsonKey(ignore: true)
   _$MapStateCopyWith<_MapState> get copyWith =>

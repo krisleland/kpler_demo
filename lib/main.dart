@@ -5,6 +5,7 @@ import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
 import 'blocs/map_bloc/map_bloc.dart';
+import 'widgets/search.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -74,6 +75,7 @@ class WorldMapState extends State<WorldMap> {
                 )),
             onStyleLoadedCallback: _onStyleLoadedCallback,
           ),
+          const Search(),
           DraggableScrollableSheet(
               expand: true,
               snap: true,
@@ -94,7 +96,7 @@ class WorldMapState extends State<WorldMap> {
                             itemCount: state.countries.length,
                             itemBuilder: (context, index) {
                               return CountryCard(
-                                country: state.countries[index],
+                                country: state.countries.values.elementAt(index),
                                 scrollController: scrollController,
                               );
                             });

@@ -43,7 +43,7 @@ class MapCubit extends Cubit<MapState> {
   }
 
   void _getCountryList() async {
-    List<Country> countries = await countryHandler.getAll();
+    Map<String, Country> countries = await countryHandler.getAll();
     if (countries.isNotEmpty) {
       emit(state.copyWith(countries: countries));
     }

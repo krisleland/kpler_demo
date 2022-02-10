@@ -7,5 +7,6 @@ part 'map_state.freezed.dart';
 
 @freezed
 class MapState with _$MapState {
-  factory MapState({@Default(LatLng(0, 0)) LatLng latLng,@Default(0.0) double zoom, @Default([]) List<Country> countries}) = _MapState;
+  factory MapState({@Default(LatLng(0, 0)) LatLng latLng,@Default(0.0) double zoom, @Default(
+      {}) Map<String, Country> countries}) = _MapState;
 }
